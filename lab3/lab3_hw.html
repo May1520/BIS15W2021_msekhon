@@ -9,7 +9,7 @@
 <meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
 
 
-<meta name="author" content="Please Add Your Name Here" />
+<meta name="author" content="Manhar Sekhon" />
 
 <meta name="date" content="2021-01-12" />
 
@@ -398,7 +398,7 @@ summary {
 
 
 <h1 class="title toc-ignore">Lab 3 Homework</h1>
-<h4 class="author">Please Add Your Name Here</h4>
+<h4 class="author">Manhar Sekhon</h4>
 <h4 class="date">2021-01-12</h4>
 
 </div>
@@ -420,11 +420,25 @@ summary {
 </ol>
 <pre class="r"><code>?msleep</code></pre>
 <pre><code>## starting httpd help server ... done</code></pre>
+<pre class="r"><code>##This is taken from V. M. Savage and G. B. West. A quantitative, theoretical framework for understanding mammalian sleep. Proceedings of the National Academy of Sciences, 104 (3):1051-1056, 2007.</code></pre>
 <ol start="2" style="list-style-type: decimal">
-<li><p>Store these data into a new data frame <code>sleep</code>.</p></li>
-<li><p>What are the dimensions of this data frame (variables and observations)? How do you know? Please show the <em>code</em> that you used to determine this below.</p></li>
+<li>Store these data into a new data frame <code>sleep</code>.</li>
+</ol>
+<pre class="r"><code>sleep&lt;- data.frame(msleep)</code></pre>
+<ol start="3" style="list-style-type: decimal">
+<li>What are the dimensions of this data frame (variables and observations)? How do you know? Please show the <em>code</em> that you used to determine this below.</li>
+</ol>
+<pre class="r"><code>dim(sleep)</code></pre>
+<pre><code>## [1] 83 11</code></pre>
+<ol start="4" style="list-style-type: decimal">
 <li><p>Are there any NAs in the data? How did you determine this? Please show your code.</p></li>
 <li><p>Show a list of the column names is this data frame.</p></li>
+</ol>
+<pre class="r"><code>names(sleep) #column names</code></pre>
+<pre><code>##  [1] &quot;name&quot;         &quot;genus&quot;        &quot;vore&quot;         &quot;order&quot;        &quot;conservation&quot;
+##  [6] &quot;sleep_total&quot;  &quot;sleep_rem&quot;    &quot;sleep_cycle&quot;  &quot;awake&quot;        &quot;brainwt&quot;     
+## [11] &quot;bodywt&quot;</code></pre>
+<ol start="6" style="list-style-type: decimal">
 <li><p>How many herbivores are represented in the data?</p></li>
 <li><p>We are interested in two groups; small and large mammals. Let’s define small as less than or equal to 1kg body weight and large as greater than or equal to 200kg body weight. Make two new dataframes (large and small) based on these parameters.</p></li>
 <li><p>What is the mean weight for both the small and large mammals?</p></li>
