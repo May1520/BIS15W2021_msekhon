@@ -1,7 +1,7 @@
 ---
 title: "Lab 3 Homework"
 author: "Manhar Sekhon"
-date: "2021-01-14"
+date: "2021-01-24"
 output:
   html_document: 
     theme: spacelab
@@ -26,10 +26,6 @@ library(tidyverse)
 
 ```r
 ?msleep
-```
-
-```
-## starting httpd help server ... done
 ```
 
 ```r
