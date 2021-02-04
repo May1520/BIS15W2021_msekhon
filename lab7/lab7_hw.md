@@ -1,7 +1,7 @@
 ---
 title: "Lab 7 Homework"
 author: "Manhar Sekhon"
-date: "2021-02-02"
+date: "2021-02-03"
 output:
   html_document: 
     theme: spacelab
