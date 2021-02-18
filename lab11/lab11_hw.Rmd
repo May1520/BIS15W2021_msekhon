@@ -109,6 +109,10 @@ gapminder_new %>%
             max=max(life_exp))
 ```
 
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 
 **5. How has life expectancy changed between 1952-2007 for each continent?**
 
@@ -124,6 +128,7 @@ gapminder_new %>%
        x="Year",
        y="Mean Life Expectancy")
 ```
+</div>
 
 
 **6. We are interested in the relationship between per capita GDP and life expectancy; i.e. does having more money help you live longer?**

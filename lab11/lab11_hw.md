@@ -1,7 +1,7 @@
 ---
 title: "Lab 11 Homework"
 author: "Manhar Sekhon"
-date: "2021-02-16"
+date: "2021-02-17"
 output:
   html_document: 
     theme: spacelab
@@ -192,6 +192,10 @@ gapminder_new %>%
 ## # ... with 50 more rows
 ```
 
+<style>
+div.blue { background-color:#e6f0ff; border-radius: 5px; padding: 20px;}
+</style>
+<div class = "blue">
 
 **5. How has life expectancy changed between 1952-2007 for each continent?**
 
@@ -214,6 +218,7 @@ gapminder_new %>%
 ```
 
 ![](lab11_hw_files/figure-html/unnamed-chunk-13-1.png)<!-- -->
+</div>
 
 
 **6. We are interested in the relationship between per capita GDP and life expectancy; i.e. does having more money help you live longer?**
