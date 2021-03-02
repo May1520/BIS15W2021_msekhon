@@ -32,8 +32,11 @@ library("tidyverse")
 library("shiny")
 library("naniar")
 library("shinydashboard")
+library("palmerpenguins")
 ```
 
+
+This code can be added to stand alone version of app. Tidyverse will get installed for users if it is not already installed.
 ```{r}
 if (!require("tidyverse")) install.packages('tidyverse')
 ```
@@ -42,12 +45,18 @@ if (!require("tidyverse")) install.packages('tidyverse')
 Copy and pasting code into the console is okay for tiny example apps, but it's not feasible for large apps, especially because advanced shiny apps can be hundreds of line of code or more. The best way to work on apps is from a stand alone script. R Studio should automatically recognize the shiny app from the basic app building blocks/skeleton. All we have to do to run our app is click the "Run App" button at the top right of the editor window.  
 ![Run App button](runapp.png){width=300px}
 
+##### New file<- Rscript     Then add needed libraries, then add data you are using eg- Homerange, Then add code for app. Standalone version of app is now created!!!
+# See plot_homerange.R and standalone app I created.R
+
 ## Practice
 1. Open and save your finished homerange app from question 3 in part 1 as a stand alone `.R` script. What packages do you need to make sure to load at the top? Run the app by clicking the Run App button. Set the run method in the Run App drop down to "Run External".  
 ![Run External](runexternal.png){width=300px}  
 
 ## Automatically Stopping an App
 When we are building an app and frequently testing it, it can be cumbersome to always make sure to stop our app by clicking the stop button. When we close the window we want the app to also stop. This can be done with a couple lines of code that tell R to stop the app in the current session when we close the window. Add the code to our current app at the end of the server function (but inside the function) and try re-running it. Your server function should look like this:  
+
+# Session$onSessionEnded line in server function stops app running in background
+
 ```{r, eval=F, echo=T}
 ui <- fluidPage(    
   
