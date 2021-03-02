@@ -1,7 +1,7 @@
 ---
 title: "Lab 12 Homework"
 author: "Manhar Sekhon"
-date: "2021-02-25"
+date: "2021-03-01"
 output:
   html_document: 
     theme: spacelab
@@ -55,9 +55,9 @@ glimpse(grizzly)
 ```
 ## Rows: 494
 ## Columns: 3
-## $ bear.id   <dbl> 7, 57, 69, 75, 104, 108, 115, 116, 125, 135, 137, 162, 18...
-## $ longitude <dbl> -148.9560, -152.6228, -144.9374, -152.8485, -143.2948, -1...
-## $ latitude  <dbl> 62.65822, 58.35064, 62.38227, 59.90122, 61.07311, 62.9160...
+## $ bear.id   <dbl> 7, 57, 69, 75, 104, 108, 115, 116, 125, 135, 137, 162, 185, ~
+## $ longitude <dbl> -148.9560, -152.6228, -144.9374, -152.8485, -143.2948, -149.~
+## $ latitude  <dbl> 62.65822, 58.35064, 62.38227, 59.90122, 61.07311, 62.91605, ~
 ```
 
 
@@ -92,7 +92,83 @@ grizzly_map1 <- get_map(bbox, maptype = "terrain", source = "stamen")
 ```
 
 ```
-## Map tiles by Stamen Design, under CC BY 3.0. Data by OpenStreetMap, under ODbL.
+## Source : http://tile.stamen.com/terrain/5/1/6.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/5/2/6.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/5/3/6.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/5/4/6.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/5/1/7.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/5/2/7.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/5/3/7.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/5/4/7.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/5/1/8.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/5/2/8.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/5/3/8.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/5/4/8.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/5/1/9.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/5/2/9.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/5/3/9.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/5/4/9.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/5/1/10.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/5/2/10.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/5/3/10.png
+```
+
+```
+## Source : http://tile.stamen.com/terrain/5/4/10.png
 ```
 
 
