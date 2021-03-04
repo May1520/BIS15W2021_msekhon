@@ -1,6 +1,6 @@
 ---
 title: "Lab 14 Homework"
-author: "Please Add Your Name Here"
+author: "Manhar Sekhon"
 date: "`r Sys.Date()`"
 output: 
   html_document: 
@@ -26,18 +26,66 @@ library(ggmap)
 
 **1. We have a satellite collars on a number of different individuals and want to be able to quickly look at all of their recent movements at once. Please load all the data files from `us_individual_collar_data` and use for loop to create plots for all different individuals of the path they move on longitude and latitude.**
 ```{r}
-
+collar_data <- list.files("data/us_individual_collar_data", full.names = TRUE)
+collar_data
 ```
+
+```{r}
+i <- 1
+for (i in 1:length(collar_data)){
+  individuals <- as.data.frame(read_csv(collar_data[i]))
+  print(
+    ggplot(individuals, aes(x=long,y=lat))+
+      geom_path()+
+      geom_point()+
+      labs(title = collar_data[i], x = "longitude", y = "latitude")
+  )
+}
+```
+
 
 **2. Please load all the data files from `us_individual_collar_data` and combine all data into one data frame. Create a summary to show what is the maximum and minimum of recorded data points on longitude and latitude.**
 ```{r}
-
+collar_us_combined <- lapply(collar_data, read_csv)
 ```
+
+```{r}
+collar_all <- bind_rows(collar_us_combined)
+```
+
+```{r}
+collar_all%>%
+  summarize(max_lat=max(lat),
+            min_lat=min(lat),
+            max_long=max(long),
+            min_long=min(long))
+```
+
 
 **3. Use the range of the latitude and longitude from Q2 to build an appropriate bounding box for your map and load a map from `stamen` in a terrain style projection and display the map. Then, build a final map that overlays the recorded path from Q1.**
 ```{r}
-
+lat <- c(26.61, 41.59)
+long <- c(-122.6, -106.3)
+bbox <- make_bbox(long, lat, f = 0.5)
+map <- get_map(bbox, maptype = "terrain", source = "stamen")
 ```
+
+```{r}
+ggmap(map)
+```
+
+```{r}
+for (i in 1:length(collar_data)){
+  data_map <- as.data.frame(read_csv(collar_data[i]))
+  print(
+    ggmap(map)+
+      geom_path(data = data_map, aes(long,lat))+
+      geom_point(data = data_map, aes(long,lat))+
+      labs(title = collar_data[i], x = "longitude", y = "latitude")
+  )
+}
+```
+
 
 ## Load the Data
 We will use the data from an experiment on hypertension in the mouse [Sugiyama et al., Genomics 71:70-77, 2001](https://www.sciencedirect.com/science/article/pii/S0888754300964012?via%3Dihub)
@@ -48,37 +96,85 @@ data(hyper)
 
 **4. Create a summary of the hypertension data. How many individuals and phenotypes are included in this data set? How many gene markers and chromosomes are included in this data set? Please create a table to show the number of markers on each chromosome.**
 ```{r}
-
+summary(hyper)
 ```
+
+```{r}
+##There are 250 individuals and 2 phenotypes. There are 174 gene markers and 20 chromosomes.
+```
+
+```{r}
+nmar(hyper)
+```
+
+```{r}
+##The number of markers on each chromosome are as shown above.
+```
+
 
 **5. Please make an interactive genetic map of markers for the hypertension data.**
 ```{r}
-
+iplotMap(hyper)
 ```
 
 **6. Make a plot shows the pattern of missing genotype data in the hypertension dataset. Please reorder the recorded individuals according to their blood pressure phenotypes. Is there a specific pattern of missing genotype? Please explain it.**
 ```{r}
-
+plotMissing(hyper, main = "", reorder = 1)
 ```
+
+```{r}
+##Blood pressure data is missing for about 50-200 individuals.
+```
+
 
 **7. Based on your answer from previous question, you probably noticed that there are gene markers without data. Please use the function `drop.nullmarkers` to remove markers that have no genotype data. After this, make a new summary to show the number of markers on each chromosome. How many gene markers were dropped? Where were the dropped markers located? Please use the data without nullmarkers for the following questions.**
 ```{r}
-drop.nullmarkers(hyper)
+hyper_drop<-drop.nullmarkers(hyper)
 ```
+
+```{r}
+nmar(hyper_drop)
+```
+
+```{r}
+## 1 marker was dropped on chromesome 14.
+```
+
 
 **8. Please conduct single-QTL analysis and create a table to give the maximum LOD score on each chromosome based on their blood pressure phenotypes. Which gene marker has the higiest LOD score? Which chromosome contains the gene marker that has the highest LOD score? Then, creates an interactive chart with LOD curves from a genome scan for all chromosomes.**
 ```{r}
-
+hyper_drop<- calc.genoprob(hyper_drop, step=1)
+hyper_lod <- scanone(hyper_drop)
 ```
+
+```{r}
+summary(hyper_lod) %>% 
+  arrange(desc(lod))
+```
+
+```{r}
+##The gene marker with the highest LOD score is D4Mit164, which is on chromosome 4.
+```
+
+```{r}
+iplotScanone(hyper_lod)
+```
+
 
 **9. Based on your genome scan results, create a table which only includes those chromosomes with LOD > 1. Creates an interactive chart with LOD curves linked to estimated QTL effects for only those chromosomes with LOD > 1. Find the gene maker with the highest LOD score and describe how does the genetype of this marker influence the individual's phenotype.**
 ```{r}
-
+summary(hyper_lod, threshold=1)
 ```
+
+```{r}
+iplotScanone(hyper_lod, hyper_drop, chr = c(1, 2, 4, 5, 6, 15))
+```
+
 
 **10. Please save your interactive chart from Q9 as a html file `hyper_iplotScanone.html` and make sure your upload it to your github repository with your lab14 homework as well.**
 ```{r}
-
+hyper_plot_scanone<-iplotScanone(hyper_lod, hyper_drop, chr = c(1, 2, 4, 5, 6, 15))
+htmlwidgets::saveWidget(hyper_plot_scanone, file="iplotScanone.html")
 ```
 
 ## Push your final code to GitHub!

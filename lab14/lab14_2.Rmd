@@ -67,7 +67,9 @@ plot(sug)
 ```
 
 Individual parts of the above plot may be obtained as follows.
-```{r}
+
+##Use drop.nullmarkers(sug) in HW
+```{r} 
 #?plotMissing
 plotMissing(sug, main="")
 plotMissing(sug, main="", reorder=1)

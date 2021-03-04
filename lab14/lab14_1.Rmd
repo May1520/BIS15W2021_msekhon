@@ -85,6 +85,16 @@ data1
 data(iris)                          # Loading data frame
 head(iris)                          # Head of example data
 iris1 <- iris                       # Replicate example data
+
+i <- 1
+repeat{
+  iris1[ , i] <- iris1[ , i] * 10
+  i <- i + 1
+  if(!is.numeric(iris1[ , i])){
+    break
+  }
+}
+head(iris1)
 ```
 
 ## While-Loops
@@ -123,6 +133,13 @@ data2
 ```{r}
 head(iris)                                        # Showing head of data in RStudio console
 iris2 <- iris                                     # Replicate example data
+
+i <- 1
+while(is.numeric(iris2[ , i])){
+  iris2[ , i] <- iris2[ , i] * 10
+  i <- i + 1
+}
+head(iris2)
 ```
 
 ## For-Loops
@@ -157,6 +174,18 @@ data3
 ```{r}                                                 
 head(iris)                                             # Inspecting iris flower data set
 iris3 <- iris                                          # Replicate iris data set
+
+for(i in c(2,4)){
+  iris3[ , i] <- iris3[ , i] * 10
+}
+head(iris3)
+
+for(i in 1:ncol(iris3)){
+  if(str_detect(colnames(iris3)[i], "Width")){
+    iris3[ , i] <- iris3[ , i] * 10
+  }
+}
+head(iris3)
 ```
 
 ### example 2: Looping over files
@@ -208,16 +237,24 @@ for (i in 1:length(data_files3)){
 ### example 4: Looping over files for basic genetic analysis
 [Bioconductor](https://www.bioconductor.org/) project is an open source software repository that hosts a wide range of statistical tools developed in the R programming environment. Please use standard R installation procedures to install the BiocManager package and then install "ShortRead" and "Biostrings". 
 ```{r message=FALSE, warning=FALSE}
-# if (!requireNamespace("BiocManager", quietly = TRUE))
+#if (!requireNamespace("BiocManager", quietly = TRUE))
 #     install.packages("BiocManager")
 # BiocManager::install()                            # To install core packages or update installed packages
-# BiocManager::install(c("ShortRead", "Biostrings"))# Install specific packages
+#BiocManager::install(c("ShortRead", "Biostrings"))# Install specific packages
 library(ShortRead)
 library(Biostrings)
 ```
 
+
+
 The data is downloaded from [PATRIC, BACTERIAL BIOINFORMATICS RESOURCE CENTER](https://patricbrc.org/)
 The first two lines load a .[fasta](https://en.wikipedia.org/wiki/FASTA_format) file using the ShortRead package in Bioconductor. The second two lines determine the frequency of all of the bases in sequence and then calculate the GC content.
+
+```{r}
+reads <- readr::read_csv("data/archaea-dna/a-saccharovorans.fasta")
+```
+
+
 ```{r}
 reads <- readFasta("data/archaea-dna/a-saccharovorans.fasta")
 seq <- sread(reads)
@@ -225,6 +262,8 @@ base_freq <- alphabetFrequency(seq)
 gc_content <- (base_freq[1, "G"] + base_freq[1, "C"]) / sum(base_freq) * 100
 gc_content
 ```
+
+
 
 Then create a for loop that uses the above code to read in each sequence file and calculate it’s GC content. Store the resulting values in a data frame with one column with file names and a second column with GC contents.
 ```{r}
